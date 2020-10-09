@@ -15,9 +15,9 @@ script: "./gradlew clean build"
 
 
 before_deploy:
-  - zip -r SpringBoot-WebService * # 본인 레포지토리 이름
+  - zip -r SpringBoot_WebService * # 본인 레포지토리 이름
   - mkdir -p deploy
-  - mv SpringBoot-WebService.zip deploy/SpringBoot-WebService.zip
+  - mv SpringBoot_WebService.zip deploy/SpringBoot_WebService.zip
 
 deploy:
   -provider: s3
