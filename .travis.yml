@@ -14,6 +14,24 @@ cache:
 script: "./gradlew clean build"
 
 
+before_deploy:
+  - zip -r SpringBoot-WebService * # 본인 레포지토리 이름
+  - mkdir -p deploy
+  - mv SpringBoot-WebService.zip deploy/SpringBoot-WebService.zip
+
+deploy:
+  -provider: s3
+  access_key_id: $AWS_ACCESS_KEY      # 엑세시 키 ID
+  secret_access_key: $AWS_SECRET_KEY  # 비밀 키
+  bucket: sopt-26th  # 버킷 이름
+  region: ap-northeast-2
+  skip_cleanup: true
+  acl: private  # zip 파일 접근을 private으로
+  local_dir: deploy
+  wait-until-deployed: true
+
+
+# CI 실행 완료시 메일로 알람
 notifications:
   email:
     recipients:
